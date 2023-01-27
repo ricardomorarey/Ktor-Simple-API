@@ -154,7 +154,7 @@ fun Route.userRouting() {
 
         get {
             call.respond(alldevices)
-            //call.respond(status = HttpStatusCode.InternalServerError, "Pin code invalid")
+            //call.respond("{\"status\":\"success\",\"data\":[{\"description\":\"MASTER_BYDEMES\",\"uuid\":\"87654321-4321-1234-5678-123456789012\",\"brand\":\"MASTER_BYDEMES\",\"type\":\"DAH\",\"subs\":\"0000\",\"connectionType\":\"normal\",\"host\":\"0\",\"port\":\"0\",\"sn\":\"MASTER_SERIAL\",\"id\":\"1\",\"channels\":[1,2,3,4],\"user\":\"MASTER_US\"},{\"description\":\"ColEvoIpPrb\",\"uuid\":\"87654321-4321-1234-5678-123456789012\",\"brand\":\"ColEvoIpPrb\",\"type\":\"DAH\",\"subs\":\"9999\",\"connectionType\":\"p2p\",\"host\":\"192.168.0.5\",\"port\":\"0\",\"sn\":\"4C036BBPAZF500B\",\"id\":\"4\",\"channels\":[1,2,3,4],\"user\":\"admin\"}]}")
         }
 
     }

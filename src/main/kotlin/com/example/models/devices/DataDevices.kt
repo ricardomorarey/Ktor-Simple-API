@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class DataDevices(
     val description: String,
     val brand: String,
-    val conecctionType: String,
+    val connectionType: String,
     val host: String,
     val id: String,
     val port: String,
