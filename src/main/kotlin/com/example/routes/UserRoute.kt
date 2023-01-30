@@ -5,6 +5,8 @@ import com.bydemes.scc.retrofit.response.devicedetail.Data
 import com.bydemes.scc.retrofit.response.devicedetail.ResponseDeviceDetail
 import com.bydemes.scc.retrofit.response.devices.DataDevices
 import com.bydemes.scc.retrofit.response.devices.ResponseDevices
+import com.bydemes.scc.retrofit.response.eventlist.DataNotifications
+import com.bydemes.scc.retrofit.response.eventlist.ResponseEventList
 import com.bydemes.tss.retrofit.response.login.*
 import com.example.models.Cctv
 import com.example.models.PinCodeModel
@@ -22,12 +24,12 @@ private val users = mutableListOf(
 )
 
 private val cctvs = mutableListOf(
-    Cctv(1111, "Dahua 5000 series")
+    Cctv("1111", "Dahua 5000 series")
 )
 
 val datadevice1 = DataDevices(
     "Dahua p2p Satprov", "DAH", "p2p", "192.168.2.200",
-    "01", "1111", "p37643nkjhkl", "subs111", "video", "Ricardo1", "2347902",
+    "01", "1111", "p37643nkjhkl", "subs111", "video", "Ricardo1", "1111",
     listOf(1)
 )
 
@@ -86,7 +88,18 @@ var devices = mutableListOf<DataDevices>(
     datadevice8
 )
 var alldevices: ResponseDevices = ResponseDevices(devices, "ok all mockup")
+val notification1 = DataNotifications("DHA", "22/01/2023", "dahua ejemplo notificacion",
+    "device334", "video", 2, "002")
+var notifications = mutableListOf<DataNotifications>(
+    notification1,
+    notification1,
+    notification1,
+    notification1,
+    notification1,
+    notification1
+)
 
+var allNotifications : ResponseEventList = ResponseEventList(notifications, "ok all mockup")
 
 private val tokens = Tokens("TokenAccesMokeadoenKtor", "TokenRefreshMokeadoenKtor")
 
@@ -164,7 +177,7 @@ fun Route.userRouting() {
                 "uuid no encontrado",
                 status = HttpStatusCode.BadRequest
             )
-            val cctv = cctvs.find { it.uuid == uuid.toInt() } ?: return@get call.respondText(
+            val cctv = cctvs.find { it.uuid == uuid } ?: return@get call.respondText(
                 "Usuario con $uuid no encontrado",
                 status = HttpStatusCode.NotFound
             )
@@ -186,6 +199,13 @@ fun Route.userRouting() {
             )
             call.respond(mycctvdetail)
         }
+    }
+    route("/events/") {
+
+        get {
+            call.respond(allNotifications)
+        }
+
     }
 
 
