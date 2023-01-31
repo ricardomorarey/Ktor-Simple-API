@@ -88,15 +88,28 @@ var devices = mutableListOf<DataDevices>(
     datadevice8
 )
 var alldevices: ResponseDevices = ResponseDevices(devices, "ok all mockup")
-val notification1 = DataNotifications("DHA", "22/01/2023", "dahua ejemplo notificacion",
-    "device334", "video", 2, "002")
+val notification1 = DataNotifications("DHA", "22/01/2023", "dahua 1",
+    "1111", "video", 1, "001")
+val notification2 = DataNotifications("HON", "31/01/2023", "honeywell 2",
+    "2222", "fire", 2, "002")
+val notification3 = DataNotifications("HIK", "30/01/2023", "hikvision 3",
+    "3333", "video", 3, "003")
+val notification4 = DataNotifications("VST", "19/01/2023", "vesta 4",
+    "4444", "panel", 4, "004")
+val notification5 = DataNotifications("DHA", "12/01/2023", "dahua 5",
+    "5555", "video", 5, "005")
+val notification6 = DataNotifications("HIK", "1/01/2023", "hikvision 6",
+    "6666", "video", 6, "006")
+val notification7 = DataNotifications("HON", "28/01/2023", "honeywell 7",
+    "7777", "fire", 7, "007")
 var notifications = mutableListOf<DataNotifications>(
     notification1,
-    notification1,
-    notification1,
-    notification1,
-    notification1,
-    notification1
+    notification2,
+    notification3,
+    notification4,
+    notification5,
+    notification6,
+    notification7
 )
 
 var allNotifications : ResponseEventList = ResponseEventList(notifications, "ok all mockup")
