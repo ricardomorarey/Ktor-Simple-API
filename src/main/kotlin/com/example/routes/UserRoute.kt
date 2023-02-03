@@ -28,51 +28,51 @@ private val cctvs = mutableListOf(
 )
 
 val datadevice1 = DataDevices(
-    "Dahua p2p Satprov", "DAH", "p2p", "192.168.2.200",
+    "ADahua p2p Satprov", "DAH", "p2p", "190.168.2.200",
     "01", "1111", "p37643nkjhkl", "subs111", "video", "Ricardo1", "1111",
     listOf(1)
 )
 
 
 val datadevice2 = DataDevices(
-    "Vesta direct Satprov", "VST", "direct", "192.168.2.220",
+    "BVesta direct ", "VST", "direct", "191.168.2.220",
     "02", "2222", "3255243564", "subs222", "panel", "Ricardo2", "2347902",
     listOf(1, 2)
 )
 
 val datadevice3 = DataDevices(
-    "Honeywell direct Satprov", "HON", "direct", "192.168.2.230",
+    "CHoneywell direct Satprov", "HON", "direct", "192.168.2.230",
     "03", "3333", "235dfg4325423", "subs333", "fire", "Ricardo3", "2347902",
     listOf(1, 2, 3)
 )
 
 val datadevice4 = DataDevices(
-    "Hikvision direct oficina", "HIK", "direct", "192.168.2.240",
-    "04", "4444", "dfsfrstgrtgs", "subs444", "video", "Ricardo3", "2347902",
+    "DHikvision direct oficina", "HIK", "direct", "193.168.2.240",
+    "04", "4444", "dfsfrstgrtgs", "subs444", "video", "Ricardo4", "2347902",
     listOf(1, 2, 3, 4)
 )
 
 val datadevice5 = DataDevices(
-    "Hikvision 2 direct oficina", "HIK", "direct", "192.168.2.250",
-    "05", "5555", "dfs3333333frstgdtrtgs", "subs555", "video", "Ricardo3", "2347902",
+    "EDahua 2 direct casa", "DAH", "direct", "194.168.2.250",
+    "05", "5555", "dfs3333333frstgdtrtgs", "subs555", "video", "Ricardo5", "2347902",
     listOf(1, 2, 3, 4)
 )
 
 val datadevice6 = DataDevices(
-    "Hikvision 2 direct oficina", "HIK", "direct", "192.168.2.250",
-    "05", "5555", "dfsfrstgd6577trtgs", "subs555", "video", "Ricardo3", "2347902",
+    "FVestas 2 direct oficina", "VST", "direct", "195.168.2.252",
+    "05", "5555", "dfsfrstgd6577trtgs", "subs555", "panel", "Ricardo6", "2347902",
     listOf(1, 2, 3, 4)
 )
 
 val datadevice7 = DataDevices(
-    "Hikvision 2 direct oficina", "HIK", "direct", "192.168.2.250",
-    "05", "5555", "dfsfeytrstg'9'9¡dtrtgs", "subs555", "video", "Ricardo3", "2347902",
+    "GHikvision direct oficina2", "HIK", "direct", "196.168.2.250",
+    "05", "5555", "dfsfeytrstg'9'9¡dtrtgs", "subs555", "video", "Ricardo7", "2347902",
     listOf(1, 2, 3, 4)
 )
 
 val datadevice8 = DataDevices(
-    "Hikvision 2 direct oficina", "HIK", "direct", "192.168.2.250",
-    "05", "5555", "dfsfrstgdteret97864uhyrtgs", "subs555", "video", "Ricardo3", "2347902",
+    "HHoneywell 334 oficina", "HON", "direct", "197.168.2.270",
+    "05", "5555", "dfsfrstgdteret97864uhyrtgs", "subs555", "fire", "Ricardo8", "2347902",
     listOf(1, 2, 3, 4)
 )
 
@@ -90,6 +90,8 @@ var devices = mutableListOf<DataDevices>(
 var alldevices: ResponseDevices = ResponseDevices(devices, "ok all mockup")
 val notification1 = DataNotifications("DHA", "22/01/2023", "dahua 1",
     "1111", "video", 1, "001")
+val notification11 = DataNotifications("DHA", "21/01/2023", "dahua 1.1",
+    "1111", "panel", 8, "023")
 val notification2 = DataNotifications("HON", "31/01/2023", "honeywell 2",
     "2222", "fire", 2, "002")
 val notification3 = DataNotifications("HIK", "30/01/2023", "hikvision 3",
@@ -104,6 +106,7 @@ val notification7 = DataNotifications("HON", "28/01/2023", "honeywell 7",
     "7777", "fire", 7, "007")
 var notifications = mutableListOf<DataNotifications>(
     notification1,
+    notification11,
     notification2,
     notification3,
     notification4,
