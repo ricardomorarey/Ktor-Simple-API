@@ -5,6 +5,7 @@ import com.example.models.devicedetail.Data
 import com.example.models.devicedetail.ResponseDeviceDetail
 import com.example.models.devices.DataDevices
 import com.example.models.devices.ResponseDevices
+import com.example.models.devicespushlist.ResponseDevicesPushList
 import com.example.models.eventlist.DataNotifications
 import com.example.models.eventlist.ResponseEventList
 import io.ktor.http.*
@@ -31,43 +32,43 @@ val datadevice1 = DataDevices(
 
 val datadevice2 = DataDevices(
     "BVesta direct ", "VST", "direct", "191.168.2.220",
-    "02", "2222", "3255243564", "subs222", "panel", "Ricardo2", "2347902",
+    "02", "2222", "3255243564", "subs222", "panel", "Ricardo2", "2222",
     listOf(1, 2)
 )
 
 val datadevice3 = DataDevices(
     "CHoneywell direct Satprov", "HON", "direct", "192.168.2.230",
-    "03", "3333", "235dfg4325423", "subs333", "fire", "Ricardo3", "2347902",
+    "03", "3333", "235dfg4325423", "subs333", "fire", "Ricardo3", "3333",
     listOf(1, 2, 3)
 )
 
 val datadevice4 = DataDevices(
     "DHikvision direct oficina", "HIK", "direct", "193.168.2.240",
-    "04", "4444", "dfsfrstgrtgs", "subs444", "video", "Ricardo4", "2347902",
+    "04", "4444", "dfsfrstgrtgs", "subs444", "video", "Ricardo4", "4444",
     listOf(1, 2, 3, 4)
 )
 
 val datadevice5 = DataDevices(
     "EDahua 2 direct casa", "DAH", "direct", "194.168.2.250",
-    "05", "5555", "dfs3333333frstgdtrtgs", "subs555", "video", "Ricardo5", "2347902",
+    "05", "5555", "dfs3333333frstgdtrtgs", "subs555", "video", "Ricardo5", "5555",
     listOf(1, 2, 3, 4)
 )
 
 val datadevice6 = DataDevices(
     "FVestas 2 direct oficina", "VST", "direct", "195.168.2.252",
-    "05", "5555", "dfsfrstgd6577trtgs", "subs555", "panel", "Ricardo6", "2347902",
+    "05", "5555", "dfsfrstgd6577trtgs", "subs555", "panel", "Ricardo6", "6666",
     listOf(1, 2, 3, 4)
 )
 
 val datadevice7 = DataDevices(
     "GHikvision direct oficina2", "HIK", "direct", "196.168.2.250",
-    "05", "5555", "dfsfeytrstg'9'9¡dtrtgs", "subs555", "video", "Ricardo7", "2347902",
+    "05", "5555", "dfsfeytrstg'9'9¡dtrtgs", "subs555", "video", "Ricardo7", "7777",
     listOf(1, 2, 3, 4)
 )
 
 val datadevice8 = DataDevices(
     "HHoneywell 334 oficina", "HON", "direct", "197.168.2.270",
-    "05", "5555", "dfsfrstgdteret97864uhyrtgs", "subs555", "fire", "Ricardo8", "2347902",
+    "05", "5555", "dfsfrstgdteret97864uhyrtgs", "subs555", "fire", "Ricardo8", "8888",
     listOf(1, 2, 3, 4)
 )
 
@@ -241,7 +242,7 @@ fun Route.userRouting() {
     route("/devices/settings/") {
 
         get {
-            call.respond(devicePushList)
+            call.respond(ResponseDevicesPushList(devicePushList, "ok"))
         }
 
     }
