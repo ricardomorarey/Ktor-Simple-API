@@ -1,17 +1,12 @@
 package com.example.routes
 
-import com.bydemes.scc.activities.main.ui.devices.DeviceItem
-import com.bydemes.scc.retrofit.response.devicedetail.Data
-import com.bydemes.scc.retrofit.response.devicedetail.ResponseDeviceDetail
-import com.bydemes.scc.retrofit.response.devices.DataDevices
-import com.bydemes.scc.retrofit.response.devices.ResponseDevices
-import com.bydemes.scc.retrofit.response.eventlist.DataNotifications
-import com.bydemes.scc.retrofit.response.eventlist.ResponseEventList
-import com.bydemes.tss.retrofit.response.login.*
-import com.example.models.Cctv
-import com.example.models.PinCodeModel
-import com.example.models.Tokens
-import com.example.models.User
+import com.example.models.*
+import com.example.models.devicedetail.Data
+import com.example.models.devicedetail.ResponseDeviceDetail
+import com.example.models.devices.DataDevices
+import com.example.models.devices.ResponseDevices
+import com.example.models.eventlist.DataNotifications
+import com.example.models.eventlist.ResponseEventList
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -74,6 +69,26 @@ val datadevice8 = DataDevices(
     "HHoneywell 334 oficina", "HON", "direct", "197.168.2.270",
     "05", "5555", "dfsfrstgdteret97864uhyrtgs", "subs555", "fire", "Ricardo8", "2347902",
     listOf(1, 2, 3, 4)
+)
+
+
+val devicePushList1 = com.example.models.devicespushlist.Data("2022-01-01T10:00:00", true, "1111")
+val devicePushList2 = com.example.models.devicespushlist.Data("2022-01-01T10:00:00", false, "2222")
+val devicePushList3 = com.example.models.devicespushlist.Data("2022-01-01T10:00:00", true, "3333")
+val devicePushList4 = com.example.models.devicespushlist.Data("2022-01-01T10:00:00", false, "4444")
+val devicePushList5 = com.example.models.devicespushlist.Data("2022-01-01T10:00:00", true, "5555")
+val devicePushList6 = com.example.models.devicespushlist.Data("2022-01-01T10:00:00", false, "6666")
+val devicePushList7 = com.example.models.devicespushlist.Data("2022-01-01T10:00:00", true, "7777")
+val devicePushList8 = com.example.models.devicespushlist.Data("2022-01-01T10:00:00", false, "8888")
+var devicePushList = listOf<com.example.models.devicespushlist.Data>(
+    devicePushList1,
+    devicePushList2,
+    devicePushList3,
+    devicePushList4,
+    devicePushList5,
+    devicePushList6,
+    devicePushList7,
+    devicePushList8
 )
 
 
@@ -223,6 +238,14 @@ fun Route.userRouting() {
         }
 
     }
+    route("/devices/settings/") {
+
+        get {
+            call.respond(devicePushList)
+        }
+
+    }
+
 
 
 }

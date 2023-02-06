@@ -1,4 +1,4 @@
-package com.bydemes.scc.activities.main.ui.devices
+package com.example.models
 
 import kotlinx.serialization.Serializable
 

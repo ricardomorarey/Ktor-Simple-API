@@ -1,4 +1,4 @@
-package com.bydemes.scc.retrofit.response.devicedetail
+package com.example.models.devicedetail
 
 import kotlinx.serialization.Serializable
 

@@ -1,4 +1,4 @@
-package com.bydemes.tss.retrofit.response.login
+package com.example.models
 
 import kotlinx.serialization.Serializable
 

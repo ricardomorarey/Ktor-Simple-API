@@ -1,4 +1,4 @@
-package com.bydemes.scc.retrofit.response.eventlist
+package com.example.models.eventlist
 
 import kotlinx.serialization.Serializable
 
