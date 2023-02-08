@@ -8,6 +8,8 @@ import com.example.models.devices.ResponseDevices
 import com.example.models.devicespushlist.ResponseDevicesPushList
 import com.example.models.eventlist.DataNotifications
 import com.example.models.eventlist.ResponseEventList
+import com.example.models.pushonofrequest.RequestPushOnOf
+import com.example.models.pushonofresponse.ResponsePushOnOff
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -21,6 +23,12 @@ private val users = mutableListOf(
 
 private val cctvs = mutableListOf(
     Cctv("1111", "Dahua 5000 series")
+)
+
+private val pushSettingsListDevices = mutableListOf(
+    "1111",
+    "2222",
+    "3333"
 )
 
 val datadevice1 = DataDevices(
@@ -243,6 +251,25 @@ fun Route.userRouting() {
 
         get {
             call.respond(ResponseDevicesPushList(devicePushList, "ok"))
+        }
+
+    }
+
+    route("/devices/{device_uuid}/settings/") {
+
+        patch {
+            val uuid = call.parameters["device_uuid"] ?: return@patch call.respondText(
+                "uuid no encontrado",
+                status = HttpStatusCode.BadRequest
+            )
+            val push = pushSettingsListDevices.find { it == uuid } ?: return@patch call.respondText(
+                "Usuario con $uuid no encontrado",
+                status = HttpStatusCode.NotFound
+            )
+
+            val isphus = call.receive<RequestPushOnOf>()
+            call.respond(ResponsePushOnOff(com.example.models.pushonofresponse.Data("2023",
+                isphus.push, uuid.toString()),"ok"))
         }
 
     }

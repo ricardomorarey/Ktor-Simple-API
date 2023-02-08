@@ -9,7 +9,7 @@ fun main() {
     embeddedServer(
         Netty,
         port = 8080,
-        host = "192.168.0.17",
+        host = "192.168.0.18",
         module = Application::module
     )
         .start(wait = true)
