@@ -1,5 +1,7 @@
 package com.example.routes
 
+import com.bydemes.scc.retrofit.request.allpushonoff.RequestAllPushOnOff
+import com.bydemes.scc.retrofit.response.allpushonoff.ResponseAllPushOnOff
 import com.example.models.*
 import com.example.models.devicedetail.Data
 import com.example.models.devicedetail.ResponseDeviceDetail
@@ -15,6 +17,7 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import javax.sound.midi.Patch
 
 private val users = mutableListOf(
     User(1, "Ricardo Gonzalez", 43, "ric@gmail.com"),
@@ -28,7 +31,11 @@ private val cctvs = mutableListOf(
 private val pushSettingsListDevices = mutableListOf(
     "1111",
     "2222",
-    "3333"
+    "3333",
+    "4444",
+    "5555",
+    "6666",
+    "7777"
 )
 
 val datadevice1 = DataDevices(
@@ -112,21 +119,21 @@ var devices = mutableListOf<DataDevices>(
     datadevice8
 )
 var alldevices: ResponseDevices = ResponseDevices(devices, "ok all mockup")
-val notification1 = DataNotifications("DHA", "22/01/2023", "dahua 1",
+val notification1 = DataNotifications("DHA", "2023-01-01T10:00:19Z", "dahua 1",
     "1111", "video", 1, "001")
-val notification11 = DataNotifications("DHA", "21/01/2023", "dahua 1.1",
+val notification11 = DataNotifications("DHA", "2023-01-02T12:00:00Z", "dahua 1.1",
     "1111", "panel", 8, "023")
-val notification2 = DataNotifications("HON", "31/01/2023", "honeywell 2",
+val notification2 = DataNotifications("HON", "2023-01-12T11:00:00Z", "honeywell 2",
     "2222", "fire", 2, "002")
-val notification3 = DataNotifications("HIK", "30/01/2023", "hikvision 3",
+val notification3 = DataNotifications("HIK", "2023-02-02T12:00:00Z", "hikvision 3",
     "3333", "video", 3, "003")
-val notification4 = DataNotifications("VST", "19/01/2023", "vesta 4",
+val notification4 = DataNotifications("VST", "2023-02-012T10:00:00Z", "vesta 4",
     "4444", "panel", 4, "004")
-val notification5 = DataNotifications("DHA", "12/01/2023", "dahua 5",
+val notification5 = DataNotifications("DHA", "2022-12-01T11:00:00Z", "dahua 5",
     "5555", "video", 5, "005")
-val notification6 = DataNotifications("HIK", "1/01/2023", "hikvision 6",
+val notification6 = DataNotifications("HIK", "2022-12-21T11:00:00Z", "hikvision 6",
     "6666", "video", 6, "006")
-val notification7 = DataNotifications("HON", "28/01/2023", "honeywell 7",
+val notification7 = DataNotifications("HON", "2022-12-21T12:00:00Z", "honeywell 7",
     "7777", "fire", 7, "007")
 var notifications = mutableListOf<DataNotifications>(
     notification1,
@@ -268,8 +275,19 @@ fun Route.userRouting() {
             )
 
             val isphus = call.receive<RequestPushOnOf>()
+            devicePushList.find { it.uuid == uuid}?.push = isphus.push
             call.respond(ResponsePushOnOff(com.example.models.pushonofresponse.Data("2023",
                 isphus.push, uuid.toString()),"ok"))
+        }
+
+    }
+
+    route("/users/me/settings/") {
+        patch {
+            val active = call.receive<RequestAllPushOnOff>().active_notifications
+            call.respond(ResponseAllPushOnOff(com.bydemes.scc.retrofit.response.allpushonoff.Data(active, "111111", "descripcion mockeada",
+                listOf("device1"), active, "uuid1111"
+            ), "ok"))
         }
 
     }

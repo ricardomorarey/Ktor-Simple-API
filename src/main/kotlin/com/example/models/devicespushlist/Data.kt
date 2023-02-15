@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Data(
     val active_until: String,
-    val push: Boolean,
+    var push: Boolean,
     val uuid: String
 )

@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RequestPushOnOf(
-    val active_until: String,
+    val active_until: String?,
     val push: Boolean
 )
