@@ -2,6 +2,7 @@ package com.example.routes
 
 import com.bydemes.scc.retrofit.request.allpushonoff.RequestAllPushOnOff
 import com.bydemes.scc.retrofit.response.allpushonoff.ResponseAllPushOnOff
+import com.bydemes.scc.retrofit.response.infouserme.ResponseInfoUserMe
 import com.example.models.*
 import com.example.models.devicedetail.Data
 import com.example.models.devicedetail.ResponseDeviceDetail
@@ -288,6 +289,20 @@ fun Route.userRouting() {
             call.respond(ResponseAllPushOnOff(com.bydemes.scc.retrofit.response.allpushonoff.Data(active, "111111", "descripcion mockeada",
                 listOf("device1"), active, "uuid1111"
             ), "ok"))
+        }
+
+    }
+
+    route("/mobile_users/me/") {
+        get {
+            call.respond(ResponseInfoUserMe(com.bydemes.scc.retrofit.response.infouserme.Data("111111",
+                "Descripcion del dispositivo?",
+                listOf("1111111", "2222222"),
+                true,
+                "1111"
+                ),
+                "ok"
+            ))
         }
 
     }
