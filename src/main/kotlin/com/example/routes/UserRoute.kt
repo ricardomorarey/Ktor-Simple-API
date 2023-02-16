@@ -295,7 +295,8 @@ fun Route.userRouting() {
 
     route("/mobile_users/me/") {
         get {
-            call.respond(ResponseInfoUserMe(com.bydemes.scc.retrofit.response.infouserme.Data("111111",
+            call.respond(ResponseInfoUserMe(com.bydemes.scc.retrofit.response.infouserme.Data(
+                "111111",
                 "Descripcion del dispositivo?",
                 listOf("1111111", "2222222"),
                 true,
