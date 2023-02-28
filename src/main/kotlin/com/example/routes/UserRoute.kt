@@ -26,7 +26,9 @@ private val users = mutableListOf(
 )
 
 private val cctvs = mutableListOf(
-    Cctv("1111", "Dahua 5000 series")
+    Cctv("1111", "Dahua 5000 series"),
+    Cctv("2222", "Dahua 5000 series"),
+    Cctv("3333", "Dahua 5000 series")
 )
 
 private val pushSettingsListDevices = mutableListOf(
@@ -120,22 +122,22 @@ var devices = mutableListOf<DataDevices>(
     datadevice8
 )
 var alldevices: ResponseDevices = ResponseDevices(devices, "ok all mockup")
-val notification1 = DataNotifications("DHA", "2023-01-01T10:00:19Z", "dahua 1",
-    "1111", "video", 1, "001")
-val notification11 = DataNotifications("DHA", "2023-01-02T12:00:00Z", "dahua 1.1",
-    "1111", "panel", 8, "023")
-val notification2 = DataNotifications("HON", "2023-01-12T11:00:00Z", "honeywell 2",
-    "2222", "fire", 2, "002")
+val notification1 = DataNotifications("DHA", "2023-02-23T10:00:19Z", "dahua 1",
+    "1111", "Lost connection" ,"video", 1, "001")
+val notification11 = DataNotifications("DHA", "2023-02-17T12:00:00Z", "dahua 1.1",
+    "1111", "connection" ,"panel", 8, "023")
+val notification2 = DataNotifications("HON", "2023-02-15T11:00:00Z", "honeywell 2",
+    "2222", "Failure connection" ,"fire", 2, "002")
 val notification3 = DataNotifications("HIK", "2023-02-02T12:00:00Z", "hikvision 3",
-    "3333", "video", 3, "003")
+    "3333", "type4" ,"video", 3, "003")
 val notification4 = DataNotifications("VST", "2023-02-012T10:00:00Z", "vesta 4",
-    "4444", "panel", 4, "004")
+    "4444", "type5" ,"panel", 4, "004")
 val notification5 = DataNotifications("DHA", "2022-12-01T11:00:00Z", "dahua 5",
-    "5555", "video", 5, "005")
+    "5555", "Lost connection" ,"video", 5, "005")
 val notification6 = DataNotifications("HIK", "2022-12-21T11:00:00Z", "hikvision 6",
-    "6666", "video", 6, "006")
+    "6666", "connection" ,"video", 6, "006")
 val notification7 = DataNotifications("HON", "2022-12-21T12:00:00Z", "honeywell 7",
-    "7777", "fire", 7, "007")
+    "7777", "type4" ,"fire", 7, "007")
 var notifications = mutableListOf<DataNotifications>(
     notification1,
     notification11,
@@ -254,6 +256,19 @@ fun Route.userRouting() {
             call.respond(allNotifications)
         }
 
+    }
+    route("/events/{device_uuid}/") {
+        get {
+            val uuid = call.parameters["device_uuid"] ?: return@get call.respondText(
+                "uuid no encontrado",
+                status = HttpStatusCode.BadRequest
+            )
+            val cctv = cctvs.find { it.uuid == uuid } ?: return@get call.respondText(
+                "Usuario con $uuid no encontrado",
+                status = HttpStatusCode.NotFound
+            )
+            call.respond(allNotifications)
+        }
     }
     route("/devices/settings/") {
 

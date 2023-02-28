@@ -9,6 +9,7 @@ data class DataNotifications(
     val description: String,
     val device: String,
     val type: String,
+    val device_type: String,
     val channel: Int,
     val id: String
 )
