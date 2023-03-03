@@ -2,7 +2,11 @@ package com.example.routes
 
 import com.bydemes.scc.retrofit.request.allpushonoff.RequestAllPushOnOff
 import com.bydemes.scc.retrofit.response.allpushonoff.ResponseAllPushOnOff
+import com.bydemes.scc.retrofit.response.authopt.ResponseAuthOpt
 import com.bydemes.scc.retrofit.response.infouserme.ResponseInfoUserMe
+import com.bydemes.scc.retrofit.response.urlbaseserverpc.DataUrlBaseServer
+import com.bydemes.scc.retrofit.response.urlbaseserverpc.ResponseUrlBaseServerPc
+import com.example.hostPort
 import com.example.models.*
 import com.example.models.devicedetail.Data
 import com.example.models.devicedetail.ResponseDeviceDetail
@@ -26,9 +30,14 @@ private val users = mutableListOf(
 )
 
 private val cctvs = mutableListOf(
-    Cctv("1111", "Dahua 5000 series"),
-    Cctv("2222", "Dahua 5000 series"),
-    Cctv("3333", "Dahua 5000 series")
+    Cctv("1111", "Dahua 1111 series"),
+    Cctv("2222", "Dahua 2222 series"),
+    Cctv("3333", "Dahua 3333 series"),
+    Cctv("4444", "Dahua 4444 series"),
+    Cctv("5555", "Dahua 5555 series"),
+    Cctv("6666", "Dahua 6666 series"),
+    Cctv("7777", "Dahua 7777 series"),
+    Cctv("8888", "Dahua 8888 series")
 )
 
 private val pushSettingsListDevices = mutableListOf(
@@ -38,7 +47,8 @@ private val pushSettingsListDevices = mutableListOf(
     "4444",
     "5555",
     "6666",
-    "7777"
+    "7777",
+    "8888"
 )
 
 val datadevice1 = DataDevices(
@@ -74,19 +84,19 @@ val datadevice5 = DataDevices(
 
 val datadevice6 = DataDevices(
     "FVestas 2 direct oficina", "VST", "direct", "195.168.2.252",
-    "05", "5555", "dfsfrstgd6577trtgs", "subs555", "panel", "Ricardo6", "6666",
+    "06", "5555", "dfsfrstgd6577trtgs", "sub666", "panel", "Ricardo6", "6666",
     listOf(1, 2, 3, 4)
 )
 
 val datadevice7 = DataDevices(
     "GHikvision direct oficina2", "HIK", "direct", "196.168.2.250",
-    "05", "5555", "dfsfeytrstg'9'9¡dtrtgs", "subs555", "video", "Ricardo7", "7777",
+    "07", "5555", "dfsfeytrstg'9'9¡dtrtgs", "subs777", "video", "Ricardo7", "7777",
     listOf(1, 2, 3, 4)
 )
 
 val datadevice8 = DataDevices(
     "HHoneywell 334 oficina", "HON", "direct", "197.168.2.270",
-    "05", "5555", "dfsfrstgdteret97864uhyrtgs", "subs555", "fire", "Ricardo8", "8888",
+    "08", "5555", "dfsfrstgdteret97864uhyrtgs", "subs888", "fire", "Ricardo8", "8888",
     listOf(1, 2, 3, 4)
 )
 
@@ -197,13 +207,26 @@ fun Route.userRouting() {
         }
         post {
             val pincode = call.receive<PinCodeModel>()
-            if (pincode.pinCode == "111111") {
+            if (pincode.otp == "111111") {
                 call.respond(LoginResponse(DataLogin("TokenAccesMokeadoenKtor", "TokenRefreshMokeadoenKtor"), "ok"))
             } else {
                 call.respond(status = HttpStatusCode.Unauthorized, "Pin code invalid")
             }
         }
 
+    }
+
+    route("/authServer/") {
+        post {
+            call.respond(ResponseAuthOpt("ok", "OK") )
+        }
+
+    }
+
+    route("/domine/") {
+        get {
+            call.respond(ResponseUrlBaseServerPc( DataUrlBaseServer(hostPort), "ok"))
+        }
     }
     route("/auth/{refresh_jti}/") {
 
