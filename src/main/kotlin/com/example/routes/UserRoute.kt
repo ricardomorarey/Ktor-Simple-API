@@ -6,6 +6,7 @@ import com.bydemes.scc.retrofit.response.authopt.ResponseAuthOpt
 import com.bydemes.scc.retrofit.response.infouserme.ResponseInfoUserMe
 import com.bydemes.scc.retrofit.response.urlbaseserverpc.DataUrlBaseServer
 import com.bydemes.scc.retrofit.response.urlbaseserverpc.ResponseUrlBaseServerPc
+import com.bydemes.tss.retrofit.response.firebase.ResponseTokenFCM
 import com.example.hostPort
 import com.example.models.*
 import com.example.models.devicedetail.Data
@@ -133,21 +134,26 @@ var devices = mutableListOf<DataDevices>(
 )
 var alldevices: ResponseDevices = ResponseDevices(devices, "ok all mockup")
 val notification1 = DataNotifications("DHA", "2023-02-23T10:00:19Z", "dahua 1",
-    "1111", "Lost connection" ,"video", 1, "001")
+    "1111", "Desconexión Grabador" ,"video", 1, "001")
 val notification11 = DataNotifications("DHA", "2023-02-17T12:00:00Z", "dahua 1.1",
-    "1111", "connection" ,"panel", 8, "023")
+    "1111", "Desconexión Cámara" ,"panel", 8, "023")
 val notification2 = DataNotifications("HON", "2023-02-15T11:00:00Z", "honeywell 2",
-    "2222", "Failure connection" ,"fire", 2, "002")
+    "2222", "Fallo Disco Duro" ,"fire", 2, "002")
 val notification3 = DataNotifications("HIK", "2023-02-02T12:00:00Z", "hikvision 3",
-    "3333", "type4" ,"video", 3, "003")
+    "3333", "Alarma Robo" ,"video", 3, "003")
 val notification4 = DataNotifications("VST", "2023-02-012T10:00:00Z", "vesta 4",
-    "4444", "type5" ,"panel", 4, "004")
+    "4444", "Alarma Pulsador" ,"panel", 4, "004")
 val notification5 = DataNotifications("DHA", "2022-12-01T11:00:00Z", "dahua 5",
-    "5555", "Lost connection" ,"video", 5, "005")
+    "5555", "Alarma Detector" ,"video", 5, "005")
 val notification6 = DataNotifications("HIK", "2022-12-21T11:00:00Z", "hikvision 6",
-    "6666", "connection" ,"video", 6, "006")
+    "6666", "Alarma Incendio" ,"video", 6, "006")
 val notification7 = DataNotifications("HON", "2022-12-21T12:00:00Z", "honeywell 7",
-    "7777", "type4" ,"fire", 7, "007")
+    "7777", "Avería" ,"fire", 7, "007")
+val notification8 = DataNotifications("HON", "2022-12-21T12:00:00Z", "honeywell 8",
+"8888", "Apertura" ,"fire", 8, "008")
+val notification9 = DataNotifications("HON", "2022-12-21T12:00:00Z", "honeywell 9",
+    "9999", "Cierre" ,"fire", 9, "009")
+
 var notifications = mutableListOf<DataNotifications>(
     notification1,
     notification11,
@@ -156,7 +162,9 @@ var notifications = mutableListOf<DataNotifications>(
     notification4,
     notification5,
     notification6,
-    notification7
+    notification7,
+    notification8,
+    notification9
 )
 
 var allNotifications : ResponseEventList = ResponseEventList(notifications, "ok all mockup")
@@ -208,12 +216,32 @@ fun Route.userRouting() {
         post {
             val pincode = call.receive<PinCodeModel>()
             if (pincode.otp == "111111") {
-                call.respond(LoginResponse(DataLogin("TokenAccesMokeadoenKtor", "TokenRefreshMokeadoenKtor"), "ok"))
+                call.respond(
+                    LoginResponse(
+                        DataLogin(
+                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+                            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0a25fdHlwIjoicmVmcmVzaCIsImV4cCI6MTYwMTM2OTU4MSwianRpIjoiOGFkODNkMzlkMjlmNDQxNzk4YjJlMDVhYmI1YzQ3NDEiLCJ1c2VyX2lkIjo2MX0.pv-BCrgvRUBJNVPIRDwS_GSxokxOjcl_S18aszhDwus"
+                        ), "ok"
+                    )
+                )
             } else {
                 call.respond(status = HttpStatusCode.Unauthorized, "Pin code invalid")
             }
         }
 
+    }
+
+    route("/fcm/") {
+        post {
+            call.respond(ResponseTokenFCM(com.bydemes.tss.retrofit.response.firebase.Data(
+                true,
+                "",
+                "",
+                "",
+                "",
+                ""
+            ), "ok"))
+        }
     }
 
     route("/authServer/") {
@@ -232,7 +260,6 @@ fun Route.userRouting() {
 
         delete() {
             call.respond(LogoutResponse("logout"))
-
         }
 
     }
@@ -240,6 +267,7 @@ fun Route.userRouting() {
 
         get {
             call.respond(alldevices)
+            //call.respond(status = HttpStatusCode.BadRequest, "error")
             //call.respond("{\"status\":\"success\",\"data\":[{\"description\":\"MASTER_BYDEMES\",\"uuid\":\"87654321-4321-1234-5678-123456789012\",\"brand\":\"MASTER_BYDEMES\",\"type\":\"DAH\",\"subs\":\"0000\",\"connectionType\":\"normal\",\"host\":\"0\",\"port\":\"0\",\"sn\":\"MASTER_SERIAL\",\"id\":\"1\",\"channels\":[1,2,3,4],\"user\":\"MASTER_US\"},{\"description\":\"ColEvoIpPrb\",\"uuid\":\"87654321-4321-1234-5678-123456789012\",\"brand\":\"ColEvoIpPrb\",\"type\":\"DAH\",\"subs\":\"9999\",\"connectionType\":\"p2p\",\"host\":\"192.168.0.5\",\"port\":\"0\",\"sn\":\"4C036BBPAZF500B\",\"id\":\"4\",\"channels\":[1,2,3,4],\"user\":\"admin\"}]}")
         }
 
@@ -271,12 +299,15 @@ fun Route.userRouting() {
                 ), "my cctv detail"
             )
             call.respond(mycctvdetail)
+            //call.respond(status = HttpStatusCode.NotFound, "error")
         }
     }
     route("/events/") {
 
         get {
             call.respond(allNotifications)
+            //call.respond(status = HttpStatusCode.NotFound, "error")
+            //call.respond(status = HttpStatusCode.PaymentRequired, "expired session")
         }
 
     }
@@ -291,12 +322,14 @@ fun Route.userRouting() {
                 status = HttpStatusCode.NotFound
             )
             call.respond(allNotifications)
+            //call.respond(status = HttpStatusCode.NotFound, "error")
         }
     }
     route("/devices/settings/") {
 
         get {
             call.respond(ResponseDevicesPushList(devicePushList, "ok"))
+            //call.respond(status = HttpStatusCode.NotFound, "errrorrrr")
         }
 
     }
@@ -342,6 +375,7 @@ fun Route.userRouting() {
                 ),
                 "ok"
             ))
+            //call.respond( status = HttpStatusCode.NotFound, "error")
         }
 
     }
