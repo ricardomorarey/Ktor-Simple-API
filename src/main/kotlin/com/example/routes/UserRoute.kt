@@ -242,6 +242,9 @@ fun Route.userRouting() {
                 ""
             ), "ok"))
         }
+        delete {
+            call.respondText("Fcm  eliminado", status = HttpStatusCode.OK)
+        }
     }
 
     route("/authServer/") {
