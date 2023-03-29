@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Data(
     val current_otp: String,
-    val description: String,
+    val name: String,
     val devices: List<String>,
     val push_active: Boolean,
     val uuid: String
